@@ -1,0 +1,18 @@
+﻿@model SchoolInfoMVC.Models.Interfaces.IViewModelWithPagination
+
+<div>
+    <h4>Filtering options</h4>
+    <form method="get" class="d-inline-block mb-1">
+        <input type="hidden" name="Pager.ItemsPerPage" value="@Model.Pager.ItemsPerPage" />
+        <div class="form-group mb-1">
+            <label for="className">Class name:</label>
+            <input type="text" name="className" value="@Context.Request.Query["className"]" />
+        </div>
+        <div class="form-group d-flex justify-content-between">
+            <input type="submit" class="btn btn-primary" value="Filter" />
+            <a asp-action="Index" asp-route-Pager.ItemsPerPage="@Model.Pager.ItemsPerPage">
+                <!button type="button" class="btn btn-light border-dark">Clear filter</!button>
+            </a>
+        </div>
+    </form>
+</div>

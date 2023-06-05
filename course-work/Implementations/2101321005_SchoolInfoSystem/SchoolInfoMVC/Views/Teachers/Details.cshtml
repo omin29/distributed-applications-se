@@ -1,0 +1,108 @@
+﻿@model TeacherVM
+
+@{
+    ViewData["Title"] = "Teacher details";
+}
+
+<h1>Teacher details</h1>
+
+<div>
+    <h4>Teacher</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.YearsExperience)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.YearsExperience)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsOnLeave)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsOnLeave)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<br />
+
+<div>
+    @if (Model?.TaughtClasses?.Count == 0)
+    {
+        <p>Currently, this teacher does not teach in any class.</p>
+    }
+    else
+    {
+        <h4>Taught classes</h4>
+        <div class="row">
+            <table class="table d-inline-block">
+
+                <thead>
+                    <tr>
+                        <th>
+                            Class name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (TeacherClassVM item in Model?.TaughtClasses!)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Class!.Name)
+                            </td>
+
+                            <td>
+                                <form asp-action="RemoveClass"
+                                    onsubmit='return confirm("Are you sure you want to remove this class? Click OK to continue.")'>
+                                    <input type="hidden" name="id" value='@item.Id' />
+                                    <input type="hidden" name="teacherId" value='@item.TeacherId' />
+                                    <input type="submit" value="Remove class" class="btn btn-danger" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <h4 class="text-danger">@TempData["ErrorMessage"]</h4>
+        }
+    }
+
+    <p>
+        <a asp-action="AddClass" asp-route-teacherId = "@Model.Id" asp-route-teacherName = "@Model.GetFullName">Add class</a>
+    </p>
+</div>

@@ -1,0 +1,76 @@
+﻿@model SchoolInfoMVC.Models.IndexVMs.ClassIndexVM
+
+@{
+    ViewData["Title"] = "Classes";
+}
+
+<h1>Classes</h1>
+
+@{
+    await Html.RenderPartialAsync("/Views/Partial/ClassFilterPartial.cshtml", Model);
+}
+
+<hr />
+
+@{
+    ViewData["ClassName"] = Context.Request.Query["className"];
+    await Html.RenderPartialAsync("/Views/Partial/PagerPartial.cshtml", Model.Pager, this.ViewData);
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameForInnerType((ClassVM c) => c.Name)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((ClassVM c) => c.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((ClassVM c) => c.AverageScore)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((ClassVM c) => c.EducationalStage)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((ClassVM c) => c.Specialization)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((ClassVM c) => c.FormTeacher)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Classes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EducationalStage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GetFormTeacherName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

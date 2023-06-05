@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SchoolInfoAPI</name>
+    </assembly>
+    <members>
+        <member name="M:SchoolInfoAPI.Controllers.AuthController.Register(ApplicationService.DTOs.UserDTO)">
+            <summary>
+            Registers a user.
+            </summary>
+            <param name="userDTO">DTO with the necessary user data</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.AuthController.Login(ApplicationService.DTOs.UserDTO)">
+            <summary>
+            Returns a JWT token for the user if the login is successful.
+            </summary>
+            <param name="userDTO">DTO with the necessary user data</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.ClassesController.GetClasses(System.Int32,System.Int32,System.String)">
+            <summary>
+            Returns a list of classes from a page. The number of classes per page and the number
+            of the desired page must be specified. Optionally, classes can be filtered by their name.
+            </summary>
+            <param name="pageNumber">The number of the requested page</param>
+            <param name="itemsPerPage">The number of items for every page</param>
+            <param name="className">Searched class name</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.ClassesController.GetClassPageCount(System.Int32,System.String)">
+            <summary>
+            Returns the count of pages if all pages have the same number of classes as specified.
+            Optionally, classes can be filtered by their name before counting the pages.
+            </summary>
+            <param name="itemsPerPage">The number of items for every page</param>
+            <param name="className">Searched class name</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.ClassesController.GetClassById(System.Int32)">
+            <summary>
+            Returns the class with specified ID.
+            </summary>
+            <param name="id">ID of the class</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.ClassesController.SaveClass(ApplicationService.DTOs.SaveClassDTO)">
+            <summary>
+            Saves a class to the database. Saving can be either updating an already existing
+            entity or creating a completely new one. When ID of 0 is provided for the entity, it will
+            be created, otherwise an update attempt will be made.
+            Note: The class specialization can be null or one of the following 
+            ["Foreign languages", "Natural sciences", "Social sciences"].
+            </summary>
+            <param name="saveClassDTO">DTO with necessary class data</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.ClassesController.DeleteClass(System.Int32)">
+            <summary>
+            Deletes a class from the database with specified ID.
+            </summary>
+            <param name="id">The ID of the class</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.StudentsController.GetStudents(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Returns a list of students from a page. The number of students per page and the number
+            of the desired page must be specified. Optionally, the students can be filtered by first name and last name.
+            </summary>
+            <param name="pageNumber">The number of the requested page</param>
+            <param name="itemsPerPage">The number of items for every page</param>
+            <param name="firstName">Searched first name</param>
+            <param name="lastName">Searched last name</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.StudentsController.GetStudentPageCount(System.Int32,System.String,System.String)">
+            <summary>
+            Returns the count of pages if all pages have the same number of students as specified.
+            Optionally, students can be filtered by first name and last name before counting the pages.
+            </summary>
+            <param name="itemsPerPage">The number of items for every page</param>
+            <param name="firstName">Searched first name</param>
+            <param name="lastName">Searched last name</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.StudentsController.GetStudentById(System.Int32)">
+            <summary>
+            Returns the student with specified ID.
+            </summary>
+            <param name="id">ID of the student</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.StudentsController.SaveStudent(ApplicationService.DTOs.SaveStudentDTO)">
+            <summary>
+            Saves a student to the database. Saving can be either updating an already existing
+            entity or creating a completely new one. When ID of 0 is provided for the entity, it will
+            be created, otherwise an update attempt will be made.
+            </summary>
+            <param name="saveStudentDTO">DTO with necessary student data</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.StudentsController.DeleteStudent(System.Int32)">
+            <summary>
+            Deletes a student from the database with specified ID.
+            </summary>
+            <param name="id">The ID of the student</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersClassesController.GetTeachersAndClasses">
+            <summary>
+            Returns all teacher and class combinations. They represent information in which classes teachers teach.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersClassesController.GetTeacherAndClassById(System.Int32)">
+            <summary>
+            Returns the teacher and class combination with specified ID.
+            </summary>
+            <param name="id">ID of the teacher and class combination</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersClassesController.GetTeacherAndClassByTeacherId(System.Int32,System.Boolean)">
+            <summary>
+            Returns the teacher and class combinations with specified teacher ID - getting the classes in which
+            a specific teacher teaches. Optionally, the logic can be reversed to return the classes in which
+            the specified teacher does NOT teach.
+            </summary>
+            <param name="teacherId">The teacher ID of the teacher and class combination</param>
+            <param name="reverse">Specifies whether the returned teacher and class combinations should not be
+            with the provided teacher ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersClassesController.SaveTeacherAndClass(ApplicationService.DTOs.SaveTeacherClassDTO)">
+            <summary>
+            Saves a teacher and class combination to the database. Saving can be either updating an already existing
+            entity or creating a completely new one. When ID of 0 is provided for the entity, it will
+            be created, otherwise an update attempt will be made.
+            </summary>
+            <param name="saveTeacherClassDTO">DTO with necessary teacher and class combination data</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersClassesController.DeleteTeacherAndClass(System.Int32)">
+            <summary>
+            Deletes a teacher and class combination from the database with specified ID.
+            </summary>
+            <param name="id">ID of the teacher and class combination</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersController.GetTeachers(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Returns a list of teachers from a page. The number of teachers per page and the number
+            of the desired page must be specified. Optionally, the teachers can be filtered by first name and last name.
+            </summary>
+            <param name="pageNumber">The number of the requested page</param>
+            <param name="itemsPerPage">The number of items for every page</param>
+            <param name="firstName">Searched first name</param>
+            <param name="lastName">Searched last name</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersController.GetTeachersWithoutTheirOwnClass">
+            <summary>
+            Returns all teachers without their own class. Those teachers are not
+            considered form teachers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersController.GetTeacherPageCount(System.Int32,System.String,System.String)">
+            <summary>
+            Returns the count of pages if all pages have the same number of teachers as specified.
+            Optionally, teachers can be filtered by first name and last name before counting the pages.
+            </summary>
+            <param name="itemsPerPage">The number of items for every page</param>
+            <param name="firstName">Searched first name</param>
+            <param name="lastName">Searched last name</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersController.GetTeacherById(System.Int32)">
+            <summary>
+            Returns the teacher with specified ID.
+            </summary>
+            <param name="id">ID of the teacher</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersController.SaveTeacher(ApplicationService.DTOs.TeacherDTO)">
+            <summary>
+            Saves a teacher to the database. Saving can be either updating an already existing
+            entity or creating a completely new one. When ID of 0 is provided for the entity, it will
+            be created, otherwise an update attempt will be made.
+            </summary>
+            <param name="teacherDTO">DTO with necessary teacher data</param>
+            <returns></returns>
+        </member>
+        <member name="M:SchoolInfoAPI.Controllers.TeachersController.DeleteTeacher(System.Int32)">
+            <summary>
+            Deletes a teacher from the database with specified ID.
+            </summary>
+            <param name="id">The ID of the teacher</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

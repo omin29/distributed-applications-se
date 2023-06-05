@@ -1,0 +1,45 @@
+﻿@model SchoolInfoMVC.Models.Shared.PagerVM
+
+@{
+    string controller = this.ViewContext.RouteData.Values["controller"]!.ToString()!;
+    string action = this.ViewContext.RouteData.Values["action"]!.ToString()!;
+    string firstName = ViewData["FirstName"]?.ToString()!;
+    string lastName = ViewData["LastName"]?.ToString()!;
+    string className = ViewData["ClassName"]?.ToString()!;
+}
+
+<div class="w-100 mb-2">
+    <span class="d-inline-block mr-3 lead">Items per page: </span>
+    <select id="dropDownListItemsPerPage" class="form-control d-inline-block w-auto text-right"
+            onchange="dropDownListItemsPerPage_OnChange()">
+        <!option @(Model.ItemsPerPage == 3 ? "selected" : "") value="3">3</!option>
+        <!option @(Model.ItemsPerPage == 5 ? "selected" : "") value="5">5</!option>
+        <!option @(Model.ItemsPerPage == 10 ? "selected" : "") value="10">10</!option>
+        <!option @(Model.ItemsPerPage == 20 ? "selected" : "") value="20">20</!option>
+    </select>
+</div>
+
+<div class="w-100">
+    <p class="d-inline-block mr-3 lead">Pages: </p>
+    <ul class="pagination d-inline-flex flex-wrap">
+        @for (var i = 1; i <= Model.PagesCount; i++)
+        {
+            <li class="page-item @(i == Model.Page ? "active" : "")">
+                <a asp-route-Pager.Page="@i" asp-route-Pager.ItemsPerPage="@Model.ItemsPerPage"
+                asp-route-firstName="@firstName" asp-route-lastName="@lastName"
+                asp-route-className="@className" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<script>
+    function dropDownListItemsPerPage_OnChange() {
+        const pagingList = document.getElementById("dropDownListItemsPerPage");
+        const itemsPerPage = pagingList[pagingList.selectedIndex].value;
+        const redirectUrl = "/@controller/@action?Pager.ItemsPerPage=" + itemsPerPage +
+        "&firstName=@firstName" + "&lastName=@lastName" + "&className=@className";
+
+        window.location.href = redirectUrl;
+    }
+</script>
